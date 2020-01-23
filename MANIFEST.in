@@ -2,6 +2,7 @@ include README.md
 include LICENSE
 include trdg/fonts/latin/*
 include trdg/fonts/cn/*
+include trdg/fonts/bn/*
 include trdg/pictures/*
 include trdg/dicts/*
 include trdg/texts/*

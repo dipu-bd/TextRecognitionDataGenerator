@@ -91,6 +91,10 @@ def create_strings_randomly(length, allow_variable, count, let, num, sym, lang):
             pool += "".join(
                 [chr(i) for i in range(19968, 40908)]
             )  # Unicode range of CHK characters
+        elif lang == "bn":
+            pool += "".join(
+                [chr(i) for i in range(0x980, 0x9FF)]
+            )  # Unicode range of Bangle characters
         else:
             pool += string.ascii_letters
     if num:
@@ -99,6 +103,9 @@ def create_strings_randomly(length, allow_variable, count, let, num, sym, lang):
         pool += "!\"#$%&'()*+,-./:;?@[\\]^_`{|}~"
 
     if lang == "cn":
+        min_seq_len = 1
+        max_seq_len = 2
+    elif lang == "bn":
         min_seq_len = 1
         max_seq_len = 2
     else:

@@ -31,6 +31,7 @@ docker run -v /output/path/:/app/out/ -t belval/trdg:latest trdg [args]
 The path (`/output/path/`) must be absolute.
 
 ## New
+
 - Add `--font_dir` argument to specify the fonts to use
 - Add `--output_mask` to output character-level mask for each image
 - Add `--character_spacing` to control space between characters (in pixels)
@@ -100,6 +101,7 @@ What if you want random skewing? Add `-k` and `-rk` (`trdg -c 1000 -w 5 -f 64 -k
 ![10](samples/10.jpg "10")
 
 ### Text distortion
+
 You can also add distorsion to the generated text with `-d` and `-do`
 
 ![23](samples/24.jpg "0")
@@ -142,7 +144,7 @@ It uses a Tensorflow model trained using [this excellent project](https://github
 
 ### Dictionary
 
-The text is chosen at random in a dictionary file (that can be found in the *dicts* folder) and drawn on a white background made with Gaussian noise. The resulting image is saved as [text]\_[index].jpg
+The text is chosen at random in a dictionary file (that can be found in the _dicts_ folder) and drawn on a white background made with Gaussian noise. The resulting image is saved as [text]\_[index].jpg
 
 There are a lot of parameters that you can tune to get the results you want, therefore I recommend checking out `trdg -h` for more information.
 
@@ -160,14 +162,19 @@ Simplified:
 
 ![28](samples/28.jpg "1")
 
+## Create images with Bangla text
+
+Do `trdg -l bn -c 1000 -w 5` to generate some sample images.
+
 ## Add new fonts
 
-The script picks a font at random from the *fonts* directory.
+The script picks a font at random from the _fonts_ directory.
 
-| Directory | Languages |
-|:----|:-----|
+| Directory   | Languages                        |
+| :---------- | :------------------------------- |
 | fonts/latin | English, French, Spanish, German |
-| fonts/cn | Chinese |
+| fonts/cn    | Chinese                          |
+| fonts/bn    | Bangla                           |
 
 Simply add/remove fonts until you get the desired output.
 
@@ -186,15 +193,15 @@ It only supports .ttf for now.
 Number of images generated per second.
 
 - Intel Core i7-4710HQ @ 2.50Ghz + SSD (-c 1000 -w 1)
-    - `-t 1` : 363 img/s
-    - `-t 2` : 694 img/s
-    - `-t 4` : 1300 img/s
-    - `-t 8` : 1500 img/s
+  - `-t 1` : 363 img/s
+  - `-t 2` : 694 img/s
+  - `-t 4` : 1300 img/s
+  - `-t 8` : 1500 img/s
 - AMD Ryzen 7 1700 @ 4.0Ghz + SSD (-c 1000 -w 1)
-    - `-t 1` : 558 img/s
-    - `-t 2` : 1045 img/s
-    - `-t 4` : 2107 img/s
-    - `-t 8` : 3297 img/s
+  - `-t 1` : 558 img/s
+  - `-t 2` : 1045 img/s
+  - `-t 4` : 2107 img/s
+  - `-t 8` : 3297 img/s
 
 ## Contributing
 
@@ -207,6 +214,7 @@ Number of images generated per second.
 If anything is missing, unclear, or simply not working, open an issue on the repository.
 
 ## What is left to do?
+
 - Better background generation
 - Better handwritten text generation
 - More customization parameters (mostly regarding background)

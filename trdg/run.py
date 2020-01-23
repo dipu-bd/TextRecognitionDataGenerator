@@ -50,7 +50,7 @@ def parse_arguments():
         "--language",
         type=str,
         nargs="?",
-        help="The language to use, should be fr (French), en (English), es (Spanish), de (German), or cn (Chinese).",
+        help="The language to use, should be fr (French), en (English), es (Spanish), de (German), cn (Chinese) or bn (Bangla).",
         default="en",
     )
     parser.add_argument(

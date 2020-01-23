@@ -665,6 +665,13 @@ class DataGenerator(unittest.TestCase):
         cn_chars = [chr(i) for i in range(19968, 40908)]
 
         self.assertTrue(all([l in cn_chars for l in s]))
+        
+    def test_generate_bangla_string(self):
+        s = create_strings_randomly(1, False, 1, True, False, False, "bn")[0]
+
+        bn_chars = [chr(i) for i in range(0x980, 0x9FF)]
+
+        self.assertTrue(all([l in bn_chars for l in s]))
 
     def test_generate_data_with_white_background(self):
         background_generator.plain_white(64, 128).convert("RGB").save(
@@ -717,6 +724,12 @@ class CommandLineInterface(unittest.TestCase):
 
     def test_language_chinese(self):
         args = ["python3", "run.py", "-l", "cn", "-c", "1", "--output_dir", "../tests/out/"]
+        subprocess.Popen(args, cwd="trdg/").wait()
+        self.assertTrue(len(os.listdir("tests/out/")) == 1)
+        empty_directory("tests/out/")
+
+    def test_language_bangla(self):
+        args = ["python3", "run.py", "-l", "bn", "-c", "1", "--output_dir", "../tests/out/"]
         subprocess.Popen(args, cwd="trdg/").wait()
         self.assertTrue(len(os.listdir("tests/out/")) == 1)
         empty_directory("tests/out/")
