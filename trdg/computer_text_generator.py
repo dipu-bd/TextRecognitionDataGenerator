@@ -21,12 +21,13 @@ def generate(
 def _generate_horizontal_text(
     text, font, text_color, font_size, space_width, character_spacing, fit
 ):
-    image_font = ImageFont.truetype(font=font, size=font_size)
+    image_font = ImageFont.truetype(font=font, size=font_size + 4)
 
-    # space_width = int(image_font.getsize(" ")[0] * space_width)
+    space_width = int(image_font.getsize(" ")[0] * space_width)
     # char_widths = [image_font.getsize(c)[0] if c != " " else space_width for c in text]
 
     text_width, text_height = image_font.getsize(text)
+    text_width *= 2
 
     txt_img = Image.new("RGBA", (text_width, text_height), (0, 0, 0, 0))
     txt_mask = Image.new("RGB", (text_width, text_height), (0, 0, 0))
