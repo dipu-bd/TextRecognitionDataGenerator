@@ -23,11 +23,10 @@ def _generate_horizontal_text(
 ):
     image_font = ImageFont.truetype(font=font, size=font_size)
 
-    space_width = int(image_font.getsize(" ")[0] * space_width)
+    # space_width = int(image_font.getsize(" ")[0] * space_width)
+    # char_widths = [image_font.getsize(c)[0] if c != " " else space_width for c in text]
 
-    char_widths = [image_font.getsize(c)[0] if c != " " else space_width for c in text]
-    text_width = sum(char_widths) + character_spacing * (len(text) - 1)
-    text_height = max([image_font.getsize(c)[1] for c in text])
+    text_width, text_height = image_font.getsize(text)
 
     txt_img = Image.new("RGBA", (text_width, text_height), (0, 0, 0, 0))
     txt_mask = Image.new("RGB", (text_width, text_height), (0, 0, 0))
@@ -45,19 +44,32 @@ def _generate_horizontal_text(
         rnd.randint(min(c1[2], c2[2]), max(c1[2], c2[2])),
     )
 
-    for i, c in enumerate(text):
-        txt_img_draw.text(
-            (sum(char_widths[0:i]) + i * character_spacing, 0),
-            c,
-            fill=fill,
-            font=image_font,
-        )
-        txt_mask_draw.text(
-            (sum(char_widths[0:i]) + i * character_spacing, 0),
-            c,
-            fill=((i + 1) // (255 * 255), (i + 1) // 255, (i + 1) % 255),
-            font=image_font,
-        )
+    txt_img_draw.text(
+        (0, 0),
+        text,
+        fill=fill,
+        font=image_font,
+    )
+    txt_mask_draw.text(
+        (0, 0),
+        text,
+        fill=(0, 0, 0),
+        font=image_font,
+    )
+
+    # for i, c in enumerate(text):
+    #     txt_img_draw.text(
+    #         (sum(char_widths[0:i]) + i * character_spacing, 0),
+    #         c,
+    #         fill=fill,
+    #         font=image_font,
+    #     )
+    #     txt_mask_draw.text(
+    #         (sum(char_widths[0:i]) + i * character_spacing, 0),
+    #         c,
+    #         fill=((i + 1) // (255 * 255), (i + 1) // 255, (i + 1) % 255),
+    #         font=image_font,
+    #     )
 
     if fit:
         return txt_img.crop(txt_img.getbbox()), txt_mask.crop(txt_img.getbbox())
